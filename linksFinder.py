@@ -22,7 +22,8 @@ for levelUrl in levelUrls:
         # retrieve the page
 
         if level + ".html" not in getFilesInDirectory(".."):
-                print("The level was not saved, so we are going to download it")
+                print("Level: " + level + " was not saved.")
+                print("Now downloading.")
                 saveWebPage(levelUrl, ".." + level + ".html")
         
         levelSoup = getLocalSoup(".." + level + ".html")
@@ -58,25 +59,6 @@ for levelUrl in levelUrls:
         # go back into base directory
         os.chdir("..")
 
-
-# # TODO: Find out the elements corresponding
-
-#         # find the elements, and their
-#         # corresponding urls
-# 	paragraphs = findParagraphs(soup)
-# 	sections = findSections(paragraphs)
         
-# 	# go through all of the links
-# 	existingFiles = os.listdir(path='.')
-# 	for number, section in enum(sections):
-
-# 		# check if the file already exists
-#                 sectionFilename = section.title + ".html"
-#                 if section.title + ".html" in existingFiles:
-#                         continue
-#                 saveWebPage(section.link, section.title + ".html")
-
-
-# 	os.chdir('..')
 
 

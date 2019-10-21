@@ -82,8 +82,16 @@ def reNumber(string):
         findNumber = r"""[0-9]{1,3}"""
         return re.search(findNumber, string).group(1).zfill(3)
 
-def convertHtmlToPdf(filename):
-    import subshell
-    defaultCommand = list("khtmltopdf -g --no-images -- disable-javascript -l")
-    subshell.call(defaultCommand + [folder + ".html"] + [folder + ".pdf"])
+def removeEmptyLines(text):
+        import re
+        return re.sub("\\t|\\n", "", text)
+
+
+def convertHtmlToPdf(inputFile, outputFile):
+        import subprocess
+        subprocess.call(("weasyprint " + inputFile + " " + outputFile).split())
+        
+        
+        
+        
     

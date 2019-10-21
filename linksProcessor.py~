@@ -1,0 +1,14 @@
+
+
+# go through each directory
+# open each of the files
+# parse the relevant portions
+# append that portion to a relevant file
+# write the contents to a file
+folders = getFoldersInDirectory()
+
+for folder in folders:
+    # parse relevant portions
+    # append the portion to relevant files
+    # write contents to a file
+    # convert to pdf
