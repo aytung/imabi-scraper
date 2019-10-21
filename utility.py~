@@ -1,0 +1,54 @@
+def getFilesInDirectory(getPath="."):
+        return [folder for folder in os.listdir(getPath) if os.path.isfile(os.path.join(os.getcwd(), folder))]
+
+def findUrlId(url):
+        urlIdRegexp = re.compile(r"""^https:\/\/www.imabi.net\/([a-z]*)\.htm""")
+        return re.search(urlIdRegexp, url).group(1)
+
+
+def getLocalSoup(url):
+    return bs(open(url).read(), 'lxml')
+
+def getSoup(url):
+	# site = 'https://dictionary.goo.ne.jp/jn/'
+	# hdr = {'User-Agent': 'Mozilla/5.0'}
+	print("Getting: " + url)
+	hdr = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 Chrome/41.0.2228.0 Safari/537.3'}
+	req = Request(url=url, headers=hdr)
+	page = urlopen(req)
+	soup = bs.BeautifulSoup(page, 'lxml')
+	return soup
+
+def saveWebPage(url, filename):
+        response = urllib.request.urlopen(url.link)
+        webContent = response.read()
+        f = open(filename, 'w')
+        f.write(webContent)
+        f.close()
+
+def findText(soup):
+    return soup.find("div", {"id" : "fw-mainColumn"})
+def findParagraphs(soup):
+        soup.find('div', {'id' : 'fw-mainColumn'}) .find_all('p')
+
+def findSections(paragraphs):
+        [TitleLink(paragraph.text, paragraph.get('href')) for paragraph in paragraphs if paragraph.a]
+
+def openLocalPage(filename):
+        return urllib.open("file://" + filename)
+
+def getFoldersInDirectory():
+        [folder for folder in os.listdir(path=".") if os.path.isdir(os.path.join(os.getcwd(), folder))]
+from collections import namedtuple
+TitleLink = namedtuple('TitleLink', 'title link')#, defaults=(None,))
+
+
+def reNumber(string):
+        findNumber = r"""[0-9]{1,3}"""
+        return re.search(findNumber, string).group(1).zfill(3)
+
+def convertHtmlToPdf(filename):
+    import subshell
+    defaultCommand = list("khtmltopdf -g --no-images -- disable-javascript -l")
+    subshell.call(defaultCommand + [folder + ".html"] + [folder + ".pdf"])
+    

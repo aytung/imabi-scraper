@@ -1,0 +1,55 @@
+import bs4 as bs 
+import subprocess
+import urllib.parse
+import sys
+import os
+
+from data import levels
+from urllib.request import urlopen, Request
+# need to use special header so that
+# website will accept request
+
+
+
+folders = getFoldersInDirectory()
+
+# iterate through all of the urls
+for level in levels:
+
+        # name folders containing the urls
+        # according to unique HTML elements
+        urlId = findUrlId(level)
+
+        # enter corresponding directory 
+	if urlId not in folders:
+		os.mkdir(level)
+                
+        os.chdir(urlId)
+
+        
+        # save the page if it isn't already there
+	if inCurDir(level):
+		soup = getSoup(level)
+                saveWebPage(level)
+
+        level_page = openLocalPage(level)
+
+        # find the elements, and their
+        # corresponding urls
+	paragraphs = findParagraphs(soup)
+	sections = findSections(paragraphs)
+        
+	# go through all of the links
+	existingFiles = os.listdir(path='.')
+	for number, section in enum(sections):
+
+		# check if the file already exists
+                sectionFilename = section.title + ".html"
+                if section.title + ".html" in existingFiles:
+                        continue
+                saveWebPage(section.link, section.title + ".html")
+
+
+	os.chdir('..')
+
+
