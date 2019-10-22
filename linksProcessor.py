@@ -38,6 +38,7 @@ for folder in folders:
     f.close()
     os.chdir("..")
     print("Converting " + folder + ".")
+    
     convertHtmlToPdf(htmlFilename, pdfFilename)
 
     
