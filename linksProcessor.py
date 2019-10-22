@@ -26,8 +26,10 @@ for folder in folders:
     for number, file in enumerate(files):
         print("Processing file " + str(number + 1) + " of " + str(numFiles))
         # parse relevant portions
-        text = removeEmptyLines(str(findText(getLocalSoup(file))))
-        
+        try:
+            text = removeBackslashes(removeEmptyLines(str(findText(getLocalSoup(file)))))
+        except:
+            print("Error: " + file + " has difficulty converting")
         # append the portion to relevant files
         f.write(text)
         

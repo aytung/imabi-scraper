@@ -84,7 +84,11 @@ def reNumber(string):
 
 def removeEmptyLines(text):
         import re
-        return re.sub("\\t|\\n", "", text)
+        return re.sub(r"""\\t|\\n""", "", text)
+
+def removeBackslashes(text):
+        import re
+        return re.sub(r"""\\""", "", text)
 
 
 def convertHtmlToPdf(inputFile, outputFile):
